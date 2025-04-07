@@ -9,3 +9,6 @@
     ✅ 과제 파일: Image_Processing_Practice_ww4.py(버전 이슈: skimage.future.graph -> skimage.graph)
     ✅ 레퍼런스 사진 파일: soccer.jpg, apples.jpg
          
+  ## ww5 지역 특징
+    ✅ 과제 파일: Image_Processing_Practice_ww5.py
+    ✅ 레퍼런스 사진 파일: mot_color70.jpg, mot_color83.jpg
