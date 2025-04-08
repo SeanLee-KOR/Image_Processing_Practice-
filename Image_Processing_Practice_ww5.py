@@ -26,7 +26,7 @@ import time
 S(0,1) = sigma(2<y<6)sigma(1<x<5)[f(y,x+1)-f(y,x)]^2 = 4
 '''
 
-# 해리스 특징점 실습 - Gausian Kernel 활용
+# 1. 해리스 특징점 실습 - Gausian Kernel 활용
 k = cv.getGaussianKernel(5,1)
 print(k)
 
@@ -84,17 +84,32 @@ for i in range(0,160):
 cv.imshow('Image Display2', popping)
 cv.waitKey()
 cv.destroyAllWindows()
+'''
+스케일 불변한 지역특징
 
-# 스케일 불변한 지역특징
+가우시안 스무딩 - 스무딩
+피라미드 방법 - 스케일을 줄임
+정규라플라시안
+Defferance of Gausian
 
-# 가우시안 스무딩 - 스무딩
-# 피라미드 방법 - 스케일을 줄임
-# 정규라플라시안
-# Defferance of Gausian
+SIFT
+특징점 검출: SURF, FAST ,AGAST 등
+기술자 추출: PCA-SIFT, GLOH, 모양 컨텍스트, 이진 기술자 등
+'''
 
-# SIFT
-# 특징점 검출: SURF, FAST ,AGAST 등
-# 기술자 추출: PCA-SIFT, GLOH, 모양 컨텍스트, 이진 기술자 등
+# 2. SIFT 검출 실습
+
+img = cv.imread('mot_color70.jpg')
+gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+print(gray)
+sift = cv.SIFT.create() # cv.SIFT_creat() Version 차이
+kp, des = sift.detectAndCompute(gray, None)
+
+gray = cv.drawKeypoints(gray, kp, None, flags=cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+cv.imshow('sift', gray)
+
+k = cv.waitKey()
+cv.destroyAllWindows()
 
 # 매칭 전략
 # 두 기술자 간 거리의 계산
@@ -102,6 +117,11 @@ cv.destroyAllWindows()
 # 최근접 이웃 d(Ai, Bj) < T
 # 최근접 이웃 거리 비율 d(Ai, Bj)/d(Ai, Bk) < T
 # 매칭 성능 측정 - confusion matrix, ROC, AUC
+
+# 3. FLANN을 이용한 SIFT 매칭
+img1 = cv.imread('mot_color70.jpg')[190:350, 440:560]
+gray1 = cv.cvtColor(img1, cv.COLOR_BGR2GRAY)
+img2 = cv.imread('mot_color83.jpg')
 
 # 호모그래피 추정
 
